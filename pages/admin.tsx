@@ -49,14 +49,13 @@ function SubmissionCard({ submission }: { submission: QuizSubmission }) {
   );
 
   const name = submission.contact?.name || 'Аноним';
-  const company = submission.contact?.company;
 
   return (
     <div className={styles.submissionCard}>
       <div className={styles.submissionCard__header} onClick={() => setOpen(!open)}>
         <div className={styles.submissionCard__meta}>
           <div className={styles.submissionCard__name}>
-            {name}{company ? ` · ${company}` : ''}
+            {name}
           </div>
           <div className={styles.submissionCard__date}>{formatDate(submission.submittedAt)}</div>
         </div>
@@ -65,11 +64,6 @@ function SubmissionCard({ submission }: { submission: QuizSubmission }) {
 
       {open && (
         <div className={styles.submissionCard__body}>
-          {submission.contact?.email && (
-            <div style={{ fontSize: 14, color: '#999', marginBottom: 20 }}>
-              📧 {submission.contact.email}
-            </div>
-          )}
 
           {blogAnswers.length > 0 && (
             <div className={styles.submissionCard__section}>
