@@ -31,6 +31,11 @@ export default function QuizPage() {
 
   const handleAchievementDone = useCallback(() => setActiveAchievement(null), []);
 
+  const goToStep = useCallback((next: Step) => {
+    setStep(next);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   const handleAnswerChange = useCallback((questionId: string, value: string | string[]) => {
     setAnswers(prev => {
       const next = { ...prev, [questionId]: value };
@@ -59,7 +64,7 @@ export default function QuizPage() {
         body: JSON.stringify({ answers, contact }),
       });
       if (!res.ok) throw new Error('Server error');
-      setStep('done');
+      goToStep('done');
     } catch {
       setError('Не удалось отправить. Попробуйте ещё раз.');
     } finally {
@@ -129,7 +134,7 @@ export default function QuizPage() {
             </div>
             <button
               className={styles.nav__next}
-              onClick={() => setStep('blog')}
+              onClick={() => goToStep('blog')}
               type="button"
             >
               Начать →
@@ -161,10 +166,10 @@ export default function QuizPage() {
             ))}
 
             <div className={styles.nav}>
-              <button className={styles.nav__back} onClick={() => setStep('intro')} type="button">
+              <button className={styles.nav__back} onClick={() => goToStep('intro')} type="button">
                 ← Назад
               </button>
-              <button className={styles.nav__next} onClick={() => setStep('digest')} type="button">
+              <button className={styles.nav__next} onClick={() => goToStep('digest')} type="button">
                 Дальше →
               </button>
             </div>
@@ -197,10 +202,10 @@ export default function QuizPage() {
             ))}
 
             <div className={styles.nav}>
-              <button className={styles.nav__back} onClick={() => setStep('blog')} type="button">
+              <button className={styles.nav__back} onClick={() => goToStep('blog')} type="button">
                 ← Назад
               </button>
-              <button className={styles.nav__next} onClick={() => setStep('contact')} type="button">
+              <button className={styles.nav__next} onClick={() => goToStep('contact')} type="button">
                 Почти готово →
               </button>
             </div>
@@ -238,7 +243,7 @@ export default function QuizPage() {
             )}
 
             <div className={styles.nav}>
-              <button className={styles.nav__back} onClick={() => setStep('digest')} type="button">
+              <button className={styles.nav__back} onClick={() => goToStep('digest')} type="button">
                 ← Назад
               </button>
               <button
