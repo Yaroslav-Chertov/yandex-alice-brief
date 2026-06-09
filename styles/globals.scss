@@ -1,0 +1,33 @@
+// Variables
+$white: #FFFFFF;
+$bg: #F7F7F5;
+$ink: #111111;
+$ink-soft: #444444;
+$muted: #999999;
+$border: #E5E5E2;
+$accent: #5B4FE8;
+$accent-light: #EAE8FD;
+$accent-dark: #4338CA;
+$success: #22C55E;
+$blog-color: #5B4FE8;
+$digest-color: #E85B8A;
+$radius: 12px;
+$radius-sm: 8px;
+$radius-lg: 20px;
+
+// Typography
+$font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// Spacing
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 40px;
+$space-2xl: 64px;
+
+// Breakpoints
+$mobile: 640px;
+
+// Google Fonts import via link in _document, using @import here as fallback
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');

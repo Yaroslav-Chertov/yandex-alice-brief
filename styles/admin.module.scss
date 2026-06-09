@@ -1,0 +1,152 @@
+@import './globals.scss';
+
+.admin {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $space-2xl $space-xl;
+
+  @media (max-width: $mobile) {
+    padding: $space-xl $space-md;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: $space-2xl;
+    flex-wrap: wrap;
+    gap: $space-md;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  &__count {
+    font-size: 14px;
+    color: $muted;
+    margin-top: 4px;
+  }
+
+  &__back {
+    font-size: 14px;
+    color: $accent;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $space-2xl;
+    color: $muted;
+    font-size: 16px;
+  }
+}
+
+.submissionCard {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  margin-bottom: $space-lg;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-lg $space-xl;
+    background: $bg;
+    border-bottom: 1px solid $border;
+    cursor: pointer;
+    user-select: none;
+    gap: $space-md;
+
+    &:hover { background: darken($bg, 1%); }
+  }
+
+  &__meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: $muted;
+    margin-top: 2px;
+  }
+
+  &__toggle {
+    font-size: 20px;
+    color: $muted;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    padding: $space-xl;
+  }
+
+  &__section {
+    margin-bottom: $space-xl;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  &__sectionTitle {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $muted;
+    margin-bottom: $space-md;
+    padding-bottom: $space-sm;
+    border-bottom: 1px solid $border;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: $space-md;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba($border, 0.5);
+    font-size: 14px;
+
+    &:last-child { border-bottom: none; }
+
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__itemQ {
+    color: $muted;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  &__itemA {
+    color: $ink;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  &__tag {
+    display: inline-flex;
+    padding: 3px 10px;
+    background: $accent-light;
+    color: $accent;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 2px;
+  }
+}
