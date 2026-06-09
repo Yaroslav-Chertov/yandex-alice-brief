@@ -38,7 +38,7 @@ export default function QuizPage() {
       if (q && !earnedAchievements.has(q.achievement.id)) {
         const isAnswered = Array.isArray(value) ? value.length > 0 : value !== '';
         if (isAnswered) {
-          setEarnedAchievements(prev => new Set([...prev, q.achievement.id]));
+          setEarnedAchievements(prev => new Set([...Array.from(prev), q.achievement.id]));
           setActiveAchievement(q.achievement);
         }
       }
