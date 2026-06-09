@@ -29,6 +29,8 @@ export default function QuizPage() {
     step === 'contact' ? 95 :
     Math.round((answeredCount / totalQuestions) * 90);
 
+  const handleAchievementDone = useCallback(() => setActiveAchievement(null), []);
+
   const handleAnswerChange = useCallback((questionId: string, value: string | string[]) => {
     setAnswers(prev => {
       const next = { ...prev, [questionId]: value };
@@ -81,25 +83,27 @@ export default function QuizPage() {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.header__logo}>
-          <span>Луч</span> × Яндекс Алиса
+          <img src="/logo.svg" alt="Луч" className={styles.header__logoImg} />
+          × Яндекс Алиса
         </div>
-        {step !== 'intro' && step !== 'done' && (
-          <div className={styles.header__step}>
-            {earnedAchievements.size} / {totalQuestions} ачивок
-          </div>
-        )}
       </header>
+
+      {/* Floating achievement counter */}
+      {step !== 'intro' && step !== 'done' && (
+        <div className={styles.achievementCounter}>
+          <span className={styles.achievementCounter__icon}>🏆</span>
+          <span className={styles.achievementCounter__count}>
+            {earnedAchievements.size}
+            <span className={styles.achievementCounter__total}>/{totalQuestions}</span>
+          </span>
+        </div>
+      )}
 
       <main className={styles.layout}>
 
         {/* ── INTRO ── */}
         {step === 'intro' && (
           <div style={{ animation: 'none' }}>
-            <div style={{ marginBottom: 12 }}>
-              <span className={`${styles.blockIntro__badge} ${styles['blockIntro__badge--blog']}`}>
-                Бриф · 2 блока
-              </span>
-            </div>
             <h1 style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.15, marginBottom: 20 }}>
               Расскажите нам<br />про задачи
             </h1>
@@ -107,16 +111,20 @@ export default function QuizPage() {
               Это займёт 5–10 минут. Просто выбирайте варианты и пишите пару слов — мы потом сделаем оценку.
               За каждый ответ получите ачивку 🏆
             </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 48 }}>
-              <div style={{ background: '#fff', border: '1px solid #E5E5E2', borderRadius: 12, padding: '16px 20px', flex: 1, minWidth: 180 }}>
-                <div style={{ fontSize: 22, marginBottom: 6 }}>📖</div>
-                <div style={{ fontWeight: 600, fontSize: 15 }}>Блог Алисы</div>
-                <div style={{ fontSize: 13, color: '#999', marginTop: 4 }}>{BLOG_QUESTIONS.length} вопросов</div>
+            <div className={styles.introBlocks}>
+              <div className={styles.introBlock}>
+                <span className={styles.introBlock__icon}>📖</span>
+                <div>
+                  <div className={styles.introBlock__name}>Блог Алисы</div>
+                  <div className={styles.introBlock__count}>{BLOG_QUESTIONS.length} вопросов</div>
+                </div>
               </div>
-              <div style={{ background: '#fff', border: '1px solid #E5E5E2', borderRadius: 12, padding: '16px 20px', flex: 1, minWidth: 180 }}>
-                <div style={{ fontSize: 22, marginBottom: 6 }}>📬</div>
-                <div style={{ fontWeight: 600, fontSize: 15 }}>Дайджест</div>
-                <div style={{ fontSize: 13, color: '#999', marginTop: 4 }}>{DIGEST_QUESTIONS.length} вопросов</div>
+              <div className={styles.introBlock}>
+                <span className={styles.introBlock__icon}>📬</span>
+                <div>
+                  <div className={styles.introBlock__name}>Дайджест</div>
+                  <div className={styles.introBlock__count}>{DIGEST_QUESTIONS.length} вопросов</div>
+                </div>
               </div>
             </div>
             <button
@@ -286,7 +294,7 @@ export default function QuizPage() {
       {/* Achievement toast */}
       <AchievementToast
         achievement={activeAchievement}
-        onDone={() => setActiveAchievement(null)}
+        onDone={handleAchievementDone}
       />
     </>
   );

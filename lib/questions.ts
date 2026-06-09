@@ -8,6 +8,7 @@ export interface Question {
   id: string;
   block: 'blog' | 'digest';
   type: 'multi' | 'single' | 'text' | 'multi_with_text';
+  display?: 'pills' | 'cards' | 'radio';
   question: string;
   hint?: string;
   options?: Option[];
@@ -42,6 +43,7 @@ export const QUESTIONS: Question[] = [
     id: 'blog_purpose',
     block: 'blog',
     type: 'multi',
+    display: 'cards',
     question: 'Что должно быть в блоге Алисы после нажатия на кнопку в чате?',
     hint: 'Выберите всё, что планируете публиковать',
     options: [
@@ -63,6 +65,7 @@ export const QUESTIONS: Question[] = [
     id: 'blog_format',
     block: 'blog',
     type: 'single',
+    display: 'radio',
     question: 'Какой основной формат материалов в блоге?',
     options: [
       { id: 'articles', label: 'Статьи / лонгриды' },
@@ -100,6 +103,7 @@ export const QUESTIONS: Question[] = [
     id: 'blog_audience',
     block: 'blog',
     type: 'multi',
+    display: 'cards',
     question: 'На кого рассчитан блог?',
     options: [
       { id: 'users', label: 'Текущие пользователи Алисы' },
@@ -167,6 +171,7 @@ export const QUESTIONS: Question[] = [
     id: 'digest_format',
     block: 'digest',
     type: 'single',
+    display: 'radio',
     question: 'Дайджест — это что?',
     hint: 'Как вы видите этот формат',
     options: [
@@ -187,6 +192,7 @@ export const QUESTIONS: Question[] = [
     id: 'digest_content',
     block: 'digest',
     type: 'multi',
+    display: 'cards',
     question: 'Что входит в дайджест?',
     hint: 'Отметьте всё релевантное',
     options: [

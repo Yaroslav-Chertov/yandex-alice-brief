@@ -38,11 +38,13 @@
     display: flex;
     align-items: center;
     gap: $space-sm;
+  }
 
-    span {
-      color: $muted;
-      font-weight: 400;
-    }
+  &__logoImg {
+    width: 28px;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
   }
 
   &__step {
@@ -63,6 +65,90 @@
 
   @media (max-width: $mobile) {
     padding: 100px $space-md $space-xl;
+  }
+}
+
+// Intro blocks (non-interactive info display)
+.introBlocks {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.introBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border-left: 2px solid $border;
+  flex: 1;
+  min-width: 160px;
+  pointer-events: none;
+  user-select: none;
+
+  &__icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $ink;
+  }
+
+  &__count {
+    font-size: 12px;
+    color: $muted;
+    margin-top: 2px;
+  }
+}
+
+// Floating achievement counter
+.achievementCounter {
+  position: fixed;
+  bottom: $space-xl;
+  left: $space-xl;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $ink;
+  color: $white;
+  padding: 10px 16px;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  font-variant-numeric: tabular-nums;
+  animation: counterIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  @keyframes counterIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  &__icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  &__count {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  &__total {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba($white, 0.5);
+  }
+
+  @media (max-width: $mobile) {
+    left: $space-md;
+    bottom: $space-md;
+    padding: 8px 12px;
   }
 }
 
@@ -208,6 +294,119 @@
         color: $white;
       }
     }
+  }
+}
+
+// Cards display — 2-column grid tiles
+.optionsCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-sm;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.optionsCards__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: $radius;
+  border: 1.5px solid $border;
+  background: $white;
+  font-size: 14px;
+  font-weight: 450;
+  color: $ink-soft;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  user-select: none;
+  gap: $space-sm;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+    background: $accent-light;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba($accent, 0.12);
+  }
+
+  &--selected {
+    background: $accent-light;
+    border-color: $accent;
+    color: $accent;
+    font-weight: 600;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.optionsCards__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: $accent;
+  color: $white;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+// Radio display — full-width stacked rows
+.optionsRadio {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.optionsRadio__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: $radius;
+  border: 1.5px solid $border;
+  background: $white;
+  font-size: 15px;
+  font-weight: 450;
+  color: $ink-soft;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  user-select: none;
+
+  &:hover {
+    border-color: $accent;
+    color: $ink;
+    background: $accent-light;
+  }
+
+  &--selected {
+    border-color: $accent;
+    color: $ink;
+    font-weight: 600;
+    background: $accent-light;
+  }
+}
+
+.optionsRadio__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid $border;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+
+  &--active {
+    background: $accent;
+    border-color: $accent;
   }
 }
 

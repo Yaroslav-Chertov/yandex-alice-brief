@@ -27,9 +27,7 @@ export default function QuestionBlock({ question, answers, onChange, index }: Qu
   };
 
   const isSelected = (optionId: string) => {
-    if (question.type === 'single') {
-      return currentAnswer === optionId;
-    }
+    if (question.type === 'single') return currentAnswer === optionId;
     return ((currentAnswer as string[] | undefined) || []).includes(optionId);
   };
 
@@ -56,6 +54,8 @@ export default function QuestionBlock({ question, answers, onChange, index }: Qu
     }
   };
 
+  const display = question.display || 'pills';
+
   return (
     <div className={styles.questionCard} style={{ animationDelay: `${index * 0.05}s` }}>
       <div className={styles.questionCard__label}>
@@ -69,7 +69,44 @@ export default function QuestionBlock({ question, answers, onChange, index }: Qu
         <div className={styles.questionCard__hint}>{question.hint}</div>
       )}
 
-      {(question.type === 'single' || question.type === 'multi' || question.type === 'multi_with_text') && question.options && (
+      {/* CARDS display — grid of larger clickable tiles */}
+      {display === 'cards' && question.options && (
+        <div className={styles.optionsCards}>
+          {question.options.map((option) => (
+            <button
+              key={option.id}
+              className={`${styles.optionsCards__item} ${isSelected(option.id) ? styles['optionsCards__item--selected'] : ''}`}
+              onClick={() => handleOptionClick(option.id)}
+              type="button"
+            >
+              {isSelected(option.id) && (
+                <span className={styles.optionsCards__check}>✓</span>
+              )}
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* RADIO display — full-width stacked rows with indicator */}
+      {display === 'radio' && question.options && (
+        <div className={styles.optionsRadio}>
+          {question.options.map((option) => (
+            <button
+              key={option.id}
+              className={`${styles.optionsRadio__item} ${isSelected(option.id) ? styles['optionsRadio__item--selected'] : ''}`}
+              onClick={() => handleOptionClick(option.id)}
+              type="button"
+            >
+              <span className={`${styles.optionsRadio__dot} ${isSelected(option.id) ? styles['optionsRadio__dot--active'] : ''}`} />
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* PILLS display — default chip buttons */}
+      {display === 'pills' && (question.type === 'single' || question.type === 'multi' || question.type === 'multi_with_text') && question.options && (
         <div className={styles.options}>
           {question.options.map((option) => (
             <button
